@@ -10,6 +10,18 @@ body {
   padding: 40px 0;
 }
 
+#container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#splits {
+  font-size: 40px;
+  padding: 0px;
+  font-weight: normal;
+}
+
 #clock {
   border: 2px solid #000;
   border-radius: 20px;
@@ -28,9 +40,8 @@ body {
   font-size: 80px;
   height: 210px;
   margin: 0 auto;
-  padding: 35px 0;
+  padding: 35px 0 0 5px;
   position: relative;
-  text-align: center;
   width: 220px;
 }
 
@@ -67,7 +78,8 @@ body {
 
 .number {
   display: inline-block;
-  width: 40px;
+  width: 16px;
+  margin-right: 8px;
 }
 
 .btn {
@@ -92,7 +104,15 @@ body {
   right: 10px;
 }
 
-.btn.start { background: #5fca5f; }
-.btn.stop  { background: #f14949; }
-.btn.reset { background: #908e8e; }
-.btn.split { background: #0851ab; }
+.btn.start {
+  background: #5fca5f;
+}
+.btn.stop {
+  background: #f14949;
+}
+.btn.reset {
+  background: #908e8e;
+}
+.btn.split {
+  background: #0851ab;
+}
