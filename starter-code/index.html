@@ -10,37 +10,42 @@
 </head>
 
 <body>
-  <div id="container">
-    <div id="splits">
-      <strong>Splits</strong>
-      <ol id="split-times">
-      </ol>
-    </div>
-    <div class="watch">
-      <div class="leash leash-top"></div>
-      <section id="clock">
-        <div id="sphere">
-          <span id="minDec" class="number">0</span>
-          <span id="minCen" class="number">0</span>
-          <span>:</span>
-          <span id="secDec" class="number">0</span>
-          <span id="secCen" class="number">0</span>
 
-          <button id="btnLeft" class="btn start">START</button>
-          <button id="btnRight" class="btn reset">RESET</button>
-        </div>
-      </section>
-      <div class="leash leash-bottom">
-        <div class="hole"></div>
-        <div class="hole"></div>
-        <div class="hole"></div>
+  <section id="splits-container">
+    <h3>Splits</h3>
+    <ol id="splits">
+    </ol>
+  </section>
+
+  <div class="leash leash-top"></div>
+
+  <section id="clock">
+    <div id="sphere">
+      <span id="minDec" class="number">0</span>
+      <span id="minUni" class="number">0</span>
+      <span>:</span>
+      <span id="secDec" class="number">0</span>
+      <span id="secUni" class="number">0</span>
+
+      <div id="milliseconds">
+        <span id="milDec">0</span>
+        <span id="milUni">0</span>
       </div>
+
+      <button id="btnLeft" class="btn start">START</button>
+      <button id="btnRight" class="btn reset">RESET</button>
     </div>
+  </section>
+
+  <div class="leash leash-bottom">
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <div class="hole"></div>
   </div>
 
-  <script src="chronometer.js" type="text/javascript"></script>
-  <script src="main.js" type="text/javascript"></script>
-
+  <script src="utils.js"></script>
+  <script src="chronometer.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>

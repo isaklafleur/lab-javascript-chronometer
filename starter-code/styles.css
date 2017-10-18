@@ -10,18 +10,6 @@ body {
   padding: 40px 0;
 }
 
-#container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-#splits {
-  font-size: 40px;
-  padding: 0px;
-  font-weight: normal;
-}
-
 #clock {
   border: 2px solid #000;
   border-radius: 20px;
@@ -40,9 +28,29 @@ body {
   font-size: 80px;
   height: 210px;
   margin: 0 auto;
-  padding: 35px 0 0 5px;
+  padding: 35px 0;
   position: relative;
+  text-align: center;
   width: 220px;
+}
+
+#splits-container {
+  font-size: 20px;
+  font-weight: 100;
+  position: absolute;
+  left: 50px;
+}
+
+#splits-container li {
+  padding-bottom: 5px;
+  text-align: right;
+}
+
+#milliseconds {
+  font-size: 36px;
+  margin-top: -15px;
+  position: absolute;
+  right: 5px;
 }
 
 .leash {
@@ -78,8 +86,7 @@ body {
 
 .number {
   display: inline-block;
-  width: 16px;
-  margin-right: 8px;
+  width: 20px;
 }
 
 .btn {

@@ -1,80 +1,122 @@
-function Chronometer() {
-  this.btnLeft = document.getElementById("btnLeft");
-  this.btnRight = document.getElementById("btnRight");
-  this.intervalID;
-  this.time = 0;
-  this.minDec = 0;
-  this.minCen = 0;
-  this.secDec = 0;
-  this.secCen = 0;
+// Constructor
+function Chronometer(utils) {
+  this.utils = utils;
+
+  this.intervalId;
+  this.millisecondsIntervalId;
+  this.currentTime = 0;
+  this.currentMilliseconds = 0;
 }
 
+// Button click events
 Chronometer.prototype.startClick = function() {
-  // Set the btnLeft button with the text STOP, and the class btn stop.
-  this.btnLeft.innerHTML = "STOP";
-  this.btnLeft.classList.add("stop");
+  btnLeft.innerHTML = "STOP";
+  btnLeft.className = "btn stop";
+  btnRight.innerHTML = "SPLIT";
+  btnRight.className = "btn split";
 
-  // Set the btnRight button with the text SPLIT, and the class btn split.
-  this.btnRight.innerHTML = "SPLIT";
-  this.btnRight.classList.add("split");
-
-  // Start Chronometer
-  this.intervalID = setInterval(() => {
-    this.time++;
-    this.updateChronometer();
-  }, 1000);
+  this.start();
 };
 
 Chronometer.prototype.stopClick = function() {
-  // Set the btnLeft button with the text START, and the class btn start.
-  this.btnLeft.innerHTML = "START";
-  this.btnLeft.classList.remove("stop");
-  // Set the btnRight button with the text RESET, and the class btn reset.
-  this.btnRight.innerHTML = "RESET";
-  this.btnRight.classList.remove("split");
+  btnLeft.innerHTML = "START";
+  btnLeft.className = "btn start";
+  btnRight.innerHTML = "RESET";
+  btnRight.className = "btn reset";
 
-  // Stop Chronometer
-  clearInterval(this.intervalID);
+  clearInterval(this.intervalId);
+  clearInterval(this.millisecondsIntervalId);
 };
 
-Chronometer.prototype.updateChronometer = function() {
-  this.secCen = this.time % 10;
-  if (this.secCen === 0) {
-    this.secDec++;
-  }
-  if (this.secDec === 6) {
-    this.secDec = 0;
-    this.minCen++;
-  }
-  if (this.minCen % 10 === 0 && this.minCen !== 0) {
-    this.minCen = 0;
-    this.minDec++;
-  }
+Chronometer.prototype.resetClick = function() {
+  this.currentTime = 0;
+  this.currentMilliseconds = 0;
 
-  document.getElementById("minDec").innerHTML = this.minDec;
-  document.getElementById("minCen").innerHTML = this.minCen;
-  document.getElementById("secDec").innerHTML = this.secDec;
-  document.getElementById("secCen").innerHTML = this.secCen;
+  this.printMinutes(0);
+  this.printSeconds(0);
+  this.printMilliseconds(0);
+  this.clearSplits();
 };
 
-Chronometer.prototype.split = function() {
-  const splitTime = document.createElement("li");
-  splitTime.innerHTML = `${this.minDec}${this.minCen} : ${this.secDec}${this
-    .secCen}`;
-  document.getElementById("split-times").appendChild(splitTime);
+Chronometer.prototype.splitClick = function() {
+  var minutes = this.getCurrentMinutes();
+  var seconds = this.getCurrentSeconds(minutes);
+  var milliseconds = this.currentMilliseconds;
+  var split =
+    this.utils.twoDigitsNumber(minutes) +
+    ":" +
+    this.utils.twoDigitsNumber(seconds) +
+    ":" +
+    this.utils.twoDigitsNumber(milliseconds);
+
+  var li = document.createElement("li");
+  li.innerHTML = split;
+  document.getElementById("splits").appendChild(li);
 };
 
-Chronometer.prototype.reset = function() {
-  this.time = 0;
-  this.minDec = 0;
-  this.minCen = 0;
-  this.secDec = 0;
-  this.secCen = 0;
-  document.getElementById("secCen").innerHTML = "0";
-  document.getElementById("secDec").innerHTML = "0";
-  document.getElementById("minCen").innerHTML = "0";
-  const splits = document.getElementById("split-times");
-  while (splits.firstChild) {
-    splits.removeChild(splits.firstChild);
+// Behaviour Functions
+Chronometer.prototype.start = function() {
+  var that = this;
+  this.intervalId = setInterval(function() {
+    that.currentTime += 1;
+    that.printTime();
+  }, 1000);
+
+  this.millisecondsIntervalId = setInterval(function() {
+    if (that.currentMilliseconds === 99) {
+      that.currentMilliseconds = 0;
+    }
+    that.currentMilliseconds += 1;
+    that.printMilliseconds(that.currentMilliseconds);
+  }, 10);
+};
+
+Chronometer.prototype.printTime = function() {
+  var minDec = document.getElementById("minDec");
+  var minUni = document.getElementById("minUni");
+  var secDec = document.getElementById("secDec");
+  var secUni = document.getElementById("secUni");
+  var milDec = document.getElementById("milDec");
+  var milUni = document.getElementById("milUni");
+
+  var minutes = this.getCurrentMinutes();
+  var seconds = this.getCurrentSeconds(minutes);
+
+  if (minutes > 0) {
+    this.printMinutes(minutes);
   }
+  this.printSeconds(seconds);
+};
+
+Chronometer.prototype.getCurrentMinutes = function() {
+  return Math.floor(this.currentTime / 60);
+};
+
+Chronometer.prototype.getCurrentSeconds = function(minutes) {
+  return this.currentTime - minutes * 60;
+};
+
+Chronometer.prototype.printMinutes = function(minutes) {
+  var mins = this.utils.twoDigitsNumber(minutes);
+
+  minDec.innerHTML = mins[0];
+  minUni.innerHTML = mins[1];
+};
+
+Chronometer.prototype.printSeconds = function(seconds) {
+  var secs = this.utils.twoDigitsNumber(seconds);
+
+  secDec.innerHTML = secs[0];
+  secUni.innerHTML = secs[1];
+};
+
+Chronometer.prototype.printMilliseconds = function(milliseconds) {
+  var milli = this.utils.twoDigitsNumber(milliseconds);
+
+  milDec.innerHTML = milli[0];
+  milUni.innerHTML = milli[1];
+};
+
+Chronometer.prototype.clearSplits = function() {
+  document.getElementById("splits").innerHTML = "";
 };
