@@ -1,7 +1,6 @@
 // Constructor
 function Chronometer(utils) {
   this.utils = utils;
-
   this.intervalId;
   this.millisecondsIntervalId;
   this.currentTime = 0;
@@ -14,7 +13,6 @@ Chronometer.prototype.startClick = function() {
   btnLeft.className = "btn stop";
   btnRight.innerHTML = "SPLIT";
   btnRight.className = "btn split";
-
   this.start();
 };
 
@@ -72,20 +70,10 @@ Chronometer.prototype.start = function() {
 };
 
 Chronometer.prototype.printTime = function() {
-  var minDec = document.getElementById("minDec");
-  var minUni = document.getElementById("minUni");
-  var secDec = document.getElementById("secDec");
-  var secUni = document.getElementById("secUni");
-  var milDec = document.getElementById("milDec");
-  var milUni = document.getElementById("milUni");
-
   var minutes = this.getCurrentMinutes();
   var seconds = this.getCurrentSeconds(minutes);
 
-  if (minutes > 0) {
-    this.printMinutes(minutes);
-  }
-  this.printSeconds(seconds);
+  minutes > 0 ? this.printMinutes(minutes) : this.printSeconds(seconds);
 };
 
 Chronometer.prototype.getCurrentMinutes = function() {
