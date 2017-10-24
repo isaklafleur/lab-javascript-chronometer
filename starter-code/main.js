@@ -1,4 +1,4 @@
-var utils = new Utils();
+const utils = new Utils();
 const chronometer = new Chronometer(utils);
 btnLeft = document.getElementById("btnLeft");
 btnRight = document.getElementById("btnRight");

@@ -51,16 +51,14 @@ class Chronometer {
 
   // Behaviour Functions
   start() {
-    var that = this;
-
-    this.millisecondsIntervalId = setInterval(function() {
-      if (that.currentMilliseconds === 99) {
-        that.currentMilliseconds = 0;
-        that.currentTime += 1;
-        that.printTime();
+    this.millisecondsIntervalId = setInterval(() => {
+      if (this.currentMilliseconds === 99) {
+        this.currentMilliseconds = 0;
+        this.currentTime += 1;
+        this.printTime();
       }
-      that.currentMilliseconds += 1;
-      that.printMilliseconds(that.currentMilliseconds);
+      this.currentMilliseconds += 1;
+      this.printMilliseconds(this.currentMilliseconds);
     }, 10);
   }
 
