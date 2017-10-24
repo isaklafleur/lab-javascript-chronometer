@@ -1,10 +1,10 @@
-function Utils() {}
+class Utils {
+  // Functions
+  hasClass(element, className) {
+    return element.className.indexOf(className) > 0;
+  }
 
-// Functions
-Utils.prototype.hasClass = function(element, className) {
-  return element.className.indexOf(className) > 0;
-};
-
-Utils.prototype.twoDigitsNumber = function(number) {
-  return ("0" + number).slice(-2);
-};
+  twoDigitsNumber(number) {
+    return ("0" + number).slice(-2);
+  }
+}
